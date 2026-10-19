@@ -1,0 +1,1039 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101027">
+  <meta name="description" content="Munnaa Khan's personal portfolio website.">
+  <title>Munnaa Khan | Personal Portfolio</title>
+
+  <style>
+    /* ===== GLOBAL STYLES ===== */
+    :root {
+      --bg: #101027;
+      --card: #191936;
+      --text: #f7f7ff;
+      --muted: #b4b4d0;
+      --purple: #a855f7;
+      --pink: #ff4f9a;
+      --cyan: #38d9f5;
+      --border: rgba(255,255,255,.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: auto;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--cyan), var(--purple), var(--pink));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .section {
+      padding: 90px 0;
+      scroll-margin-top: 80px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 40px);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--muted);
+      margin: 0 auto 42px;
+      max-width: 620px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 30px;
+      border: 1px solid transparent;
+      background: linear-gradient(100deg, var(--purple), var(--pink));
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: .25s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(168,85,247,.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-color: var(--border);
+    }
+
+    /* ===== NAVBAR ===== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(16,16,39,.88);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      min-height: 72px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 23px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      transition: .2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--cyan);
+    }
+
+    .menu-btn {
+      display: none;
+      background: transparent;
+      color: white;
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 24px;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      background: var(--purple);
+      filter: blur(150px);
+      opacity: .2;
+      top: 0;
+      left: -150px;
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      align-items: center;
+      gap: 55px;
+      padding: 65px 0;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 7px 15px;
+      border: 1px solid var(--border);
+      border-radius: 25px;
+      color: var(--cyan);
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .hero h2 {
+      font-size: clamp(19px, 3vw, 26px);
+      margin-bottom: 15px;
+      color: var(--muted);
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 28px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 13px;
+      flex-wrap: wrap;
+    }
+
+    .profile-wrap {
+      display: flex;
+      justify-content: center;
+    }
+
+    .profile-frame {
+      width: min(330px, 100%);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      padding: 8px;
+      background: linear-gradient(135deg, var(--cyan), var(--purple), var(--pink));
+      box-shadow: 0 0 70px rgba(168,85,247,.22);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .profile-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: var(--card);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .profile-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-placeholder {
+      text-align: center;
+      padding: 20px;
+      color: var(--muted);
+    }
+
+    .profile-placeholder span {
+      display: block;
+      font-size: 75px;
+      line-height: 1.4;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    /* ===== ABOUT ===== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      transition: .25s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(56,217,245,.4);
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+      font-size: 21px;
+    }
+
+    .card p, .card li {
+      color: var(--muted);
+    }
+
+    .info-list {
+      list-style: none;
+    }
+
+    .info-list li {
+      padding: 7px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .info-list li:last-child {
+      border-bottom: none;
+    }
+
+    /* ===== SKILLS ===== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .skill-card {
+      text-align: center;
+    }
+
+    .skill-icon {
+      width: 65px;
+      height: 65px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 15px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(168,85,247,.2), rgba(56,217,245,.15));
+      font-size: 30px;
+    }
+
+    /* ===== EDUCATION ===== */
+    .timeline {
+      max-width: 750px;
+      margin: auto;
+      border-left: 2px solid var(--purple);
+      padding-left: 28px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 25px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -36px;
+      top: 12px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 15px var(--cyan);
+    }
+
+    .timeline-item .year {
+      color: var(--cyan);
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    /* ===== PROJECTS ===== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .project-icon {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .project-card p {
+      margin-bottom: 15px;
+    }
+
+    .project-label {
+      display: inline-block;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(168,85,247,.17);
+      color: #d8b4fe;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 25px;
+    }
+
+    .contact-item {
+      padding: 12px 0;
+      color: var(--muted);
+      overflow-wrap: anywhere;
+    }
+
+    .contact-item strong {
+      display: block;
+      color: var(--text);
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 15px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 13px 15px;
+      outline: none;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: var(--purple);
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 130px;
+    }
+
+    .form-note {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 25px 0;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .socials {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    .socials a {
+      border: 1px solid var(--border);
+      padding: 7px 13px;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+
+    .socials a:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    .back-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: none;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      color: white;
+      font-size: 21px;
+      cursor: pointer;
+      display: none;
+      z-index: 50;
+    }
+
+    .back-top.show {
+      display: block;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE DESIGN ===== */
+    @media (max-width: 800px) {
+      .menu-btn {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        width: 100%;
+        padding: 22px 5%;
+        background: #15152f;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+      }
+
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-buttons, .socials {
+        justify-content: center;
+      }
+
+      .profile-wrap {
+        grid-row: 1;
+      }
+
+      .profile-frame {
+        width: 230px;
+      }
+
+      .about-grid, .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .skills-grid, .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .section {
+        padding: 65px 0;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .skills-grid, .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .hero h1 {
+        font-size: 39px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition: none !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <header>
+    <nav class="container">
+      <a href="#home" class="logo">
+        Munnaa<span class="gradient-text">Khan.</span>
+      </a>
+
+      <button class="menu-btn" id="menuBtn"
+        aria-label="Open navigation" aria-expanded="false"
+        aria-controls="navLinks">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HOME / HERO -->
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+
+        <div class="hero-content">
+          <span class="tag">✦ Welcome to my portfolio</span>
+
+          <h1>Hello, I'm<br>
+            <span class="gradient-text">Munnaa Khan</span>
+          </h1>
+
+          <h2>I'm a <span class="gradient-text" id="typing">Nursing Student</span></h2>
+
+          <p>
+            Welcome to my personal portfolio! I am passionate about learning,
+            personal growth, healthcare, and building a brighter future.
+            Explore my journey, interests, and work.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#about" class="btn">Discover More ↗</a>
+            <a href="#contact" class="btn btn-outline">Contact Me</a>
+          </div>
+
+          <div class="socials">
+            <!-- Replace # with your real profile URLs -->
+            <a href="#" data-social="Facebook">Facebook</a>
+            <a href="#" data-social="Instagram">Instagram</a>
+            <a href="#" data-social="GitHub">GitHub</a>
+          </div>
+        </div>
+
+        <div class="profile-wrap">
+          <div class="profile-frame">
+            <div class="profile-inner" id="profileBox">
+              <div class="profile-placeholder">
+                <span>👨‍🎓</span>
+                <p>Add your photo here</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="container">
+        <h2 class="section-title reveal">About <span class="gradient-text">Me</span></h2>
+        <p class="section-subtitle reveal">
+          A little introduction about who I am and what I want to achieve.
+        </p>
+
+        <div class="about-grid">
+          <article class="card reveal">
+            <h3>👋 Who Am I?</h3>
+            <p>
+              My name is Munnaa Khan. I believe in continuous learning,
+              discipline, kindness, and self-improvement. I enjoy developing
+              my knowledge and working toward meaningful goals.
+            </p>
+          </article>
+
+          <article class="card reveal">
+            <h3>✨ Personal Information</h3>
+            <ul class="info-list">
+              <li><strong>Name:</strong> Munnaa Khan</li>
+              <li><strong>Profession:</strong> Nursing Student</li>
+              <li><strong>Interests:</strong> Healthcare & Technology</li>
+              <li><strong>Location:</strong> Bangladesh</li>
+              <li><strong>Email:</strong> Add your email address</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section" id="skills">
+      <div class="container">
+        <h2 class="section-title reveal">My <span class="gradient-text">Skills</span></h2>
+        <p class="section-subtitle reveal">
+          Areas I am interested in learning and improving.
+          Edit these cards to reflect your actual skills.
+        </p>
+
+        <div class="skills-grid">
+          <article class="card skill-card reveal">
+            <div class="skill-icon">🩺</div>
+            <h3>Healthcare</h3>
+            <p>Learning nursing fundamentals and patient care.</p>
+          </article>
+
+          <article class="card skill-card reveal">
+            <div class="skill-icon">💻</div>
+            <h3>Computer Skills</h3>
+            <p>Digital tools, internet research, and productivity.</p>
+          </article>
+
+          <article class="card skill-card reveal">
+            <div class="skill-icon">🤝</div>
+            <h3>Communication</h3>
+            <p>Teamwork, respectful communication, and listening.</p>
+          </article>
+
+          <article class="card skill-card reveal">
+            <div class="skill-icon">📚</div>
+            <h3>Learning</h3>
+            <p>Building knowledge through regular study and practice.</p>
+          </article>
+
+          <article class="card skill-card reveal">
+            <div class="skill-icon">🎯</div>
+            <h3>Goal Setting</h3>
+            <p>Planning goals and improving step by step.</p>
+          </article>
+
+          <article class="card skill-card reveal">
+            <div class="skill-icon">🌱</div>
+            <h3>Personal Growth</h3>
+            <p>Developing good habits and lifelong learning.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="section" id="education">
+      <div class="container">
+        <h2 class="section-title reveal">My <span class="gradient-text">Education</span></h2>
+        <p class="section-subtitle reveal">
+          My educational journey. Update the details and dates below.
+        </p>
+
+        <div class="timeline">
+          <article class="card timeline-item reveal">
+            <p class="year">Add your year</p>
+            <h3>Secondary School Certificate (SSC)</h3>
+            <p>Add your school name and result here.</p>
+          </article>
+
+          <article class="card timeline-item reveal">
+            <p class="year">Add your year</p>
+            <h3>Higher Secondary Certificate (HSC)</h3>
+            <p>Add your college name and result here.</p>
+          </article>
+
+          <article class="card timeline-item reveal">
+            <p class="year">Current / Add year</p>
+            <h3>Nursing Education</h3>
+            <p>Khwaja Yunus Ali Nursing College — edit this information if needed.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="container">
+        <h2 class="section-title reveal">My <span class="gradient-text">Projects</span></h2>
+        <p class="section-subtitle reveal">
+          A space to showcase your projects, assignments, and achievements.
+        </p>
+
+        <div class="projects-grid">
+          <article class="card project-card reveal">
+            <div class="project-icon">🌐</div>
+            <h3>Personal Portfolio</h3>
+            <p>A responsive personal website built with HTML, CSS, and JavaScript.</p>
+            <span class="project-label">Web Design</span>
+          </article>
+
+          <article class="card project-card reveal">
+            <div class="project-icon">🩺</div>
+            <h3>Nursing Study Notes</h3>
+            <p>Organized learning materials, revision notes, and educational charts.</p>
+            <span class="project-label">Education</span>
+          </article>
+
+          <article class="card project-card reveal">
+            <div class="project-icon">📊</div>
+            <h3>Learning Projects</h3>
+            <p>Add your academic assignments, presentations, and completed work here.</p>
+            <span class="project-label">Personal Growth</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="container">
+        <h2 class="section-title reveal">Get In <span class="gradient-text">Touch</span></h2>
+        <p class="section-subtitle reveal">
+          Have a question or want to connect? Send me a message.
+        </p>
+
+        <div class="contact-grid">
+          <div class="card reveal">
+            <h3>📬 Contact Information</h3>
+
+            <div class="contact-item">
+              <strong>📧 Email</strong>
+              Add your email address
+            </div>
+
+            <div class="contact-item">
+              <strong>📍 Location</strong>
+              Bangladesh
+            </div>
+
+            <div class="contact-item">
+              <strong>🌐 Website</strong>
+              Munnaa Khan Portfolio
+            </div>
+
+            <p style="color:var(--muted); margin-top:15px;">
+              Replace the example information with your real contact details.
+            </p>
+          </div>
+
+          <form class="card contact-form reveal" id="contactForm">
+            <h3>Send a Message</h3>
+
+            <label for="visitorName">Your Name</label>
+            <input id="visitorName" name="name" type="text"
+              placeholder="Enter your name" required>
+
+            <label for="visitorEmail">Your Email</label>
+            <input id="visitorEmail" name="email" type="email"
+              placeholder="Enter your email" required>
+
+            <label for="visitorMessage">Message</label>
+            <textarea id="visitorMessage" name="message"
+              placeholder="Write your message..." required></textarea>
+
+            <button type="submit" class="btn">Send Message ↗</button>
+
+            <p class="form-note">
+              The form opens your email app. Add your email address in the
+              JavaScript settings below before publishing.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>© <span id="year"></span> <span class="gradient-text">Munnaa Khan</span>.
+        All rights reserved.</p>
+      <p>Designed with 💜 and creativity.</p>
+    </div>
+  </footer>
+
+  <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+
+  <script>
+    // ===== CUSTOMIZE THESE SETTINGS =====
+
+    // Add your real email address here.
+    const CONTACT_EMAIL = "your-email@example.com";
+
+    // Add a photo file named profile.jpg in the same GitHub repository.
+    // Leave empty to show the default student icon.
+    const PROFILE_IMAGE = "";
+
+    // Change these phrases if you want.
+    const ROLES = [
+      "Nursing Student",
+      "Lifelong Learner",
+      "Future Professional"
+    ];
+
+    // ===== PROFILE PHOTO =====
+    const profileBox = document.getElementById("profileBox");
+
+    if (PROFILE_IMAGE.trim()) {
+      const photo = document.createElement("img");
+      photo.src = PROFILE_IMAGE;
+      photo.alt = "Munnaa Khan profile photo";
+      photo.onerror = () => {
+        profileBox.innerHTML =
+          '<div class="profile-placeholder"><span>👨‍🎓</span><p>Add your photo here</p></div>';
+      };
+      profileBox.replaceChildren(photo);
+    }
+
+    // ===== MOBILE MENU =====
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", String(isOpen));
+      menuBtn.textContent = isOpen ? "✕" : "☰";
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuBtn.setAttribute("aria-expanded", "false");
+        menuBtn.textContent = "☰";
+      });
+    });
+
+    // ===== TYPING EFFECT =====
+    const typingElement = document.getElementById("typing");
+    let roleIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+    function typeRole() {
+      const role = ROLES[roleIndex];
+
+      typingElement.textContent = role.substring(0, charIndex);
+
+      if (!deleting) {
+        charIndex++;
+
+        if (charIndex > role.length) {
+          deleting = true;
+          setTimeout(typeRole, 1300);
+          return;
+        }
+      } else {
+        charIndex--;
+
+        if (charIndex < 0) {
+          charIndex = 0;
+          deleting = false;
+          roleIndex = (roleIndex + 1) % ROLES.length;
+        }
+      }
+
+      setTimeout(typeRole, deleting ? 45 : 90);
+    }
+
+    typeRole();
+
+    // ===== SCROLL REVEAL =====
+    const revealElements = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      revealElements.forEach(element => observer.observe(element));
+    } else {
+      revealElements.forEach(element => element.classList.add("visible"));
+    }
+
+    // ===== ACTIVE NAVIGATION =====
+    const sections = document.querySelectorAll("main section[id]");
+    const navAnchors = navLinks.querySelectorAll("a");
+
+    if ("IntersectionObserver" in window) {
+      const sectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navAnchors.forEach(link => {
+              const active = link.getAttribute("href") === "#" + entry.target.id;
+              link.classList.toggle("active", active);
+            });
+          }
+        });
+      }, { rootMargin: "-25% 0px -60% 0px" });
+
+      sections.forEach(section => sectionObserver.observe(section));
+    }
+
+    // ===== BACK TO TOP =====
+    const backTop = document.getElementById("backTop");
+
+    window.addEventListener("scroll", () => {
+      backTop.classList.toggle("show", window.scrollY > 400);
+    });
+
+    backTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // ===== FOOTER YEAR =====
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // ===== SOCIAL LINKS =====
+    // Replace each href="#" in the HTML with your actual social profile URL.
+    document.querySelectorAll("[data-social]").forEach(link => {
+      link.addEventListener("click", event => {
+        if (link.getAttribute("href") === "#") {
+          event.preventDefault();
+          alert("Please add your " + link.dataset.social + " profile URL first.");
+        }
+      });
+    });
+
+    // ===== CONTACT FORM =====
+    // GitHub Pages does not process form submissions by itself.
+    // This uses the visitor's default email application.
+    document.getElementById("contactForm").addEventListener("submit", event => {
+      event.preventDefault();
+
+      if (CONTACT_EMAIL === "your-email@example.com" ||
+          !CONTACT_EMAIL.includes("@")) {
+        alert("Please add your real email address in CONTACT_EMAIL in the JavaScript settings.");
+        return;
+      }
+
+      const name = document.getElementById("visitorName").value.trim();
+      const email = document.getElementById("visitorEmail").value.trim();
+      const message = document.getElementById("visitorMessage").value.trim();
+
+      const subject = encodeURIComponent("Portfolio message from " + name);
+      const body = encodeURIComponent(
+        "Name: " + name + "\n" +
+        "Email: " + email + "\n\n" +
+        "Message:\n" + message
+      );
+
+      window.location.href =
+        "mailto:" + CONTACT_EMAIL + "?subject=" + subject + "&body=" + body;
+    });
+  </script>
+
+</body>
+</html>
